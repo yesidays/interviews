@@ -6,6 +6,11 @@ class LinkedList():
     def get_head(self):
         return self.head
 
+    def is_empty(self):
+        if self.head is None:
+            return True
+        else:
+            return False
 
     def printList(self):
         temp = self.head
@@ -15,6 +20,13 @@ class LinkedList():
             temp = temp.next
 
     
+    def insert_at_head(self, data):
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
+
+    
+    #O(n) - Traversal
     def insert_at_tail(lst, data):
 
         new_node = Node(data)
@@ -31,6 +43,74 @@ class LinkedList():
         return
 
 
+    #O(n) - Return boolean
+    def search(self, data):
+        if self.get_head() is None:
+            return False
+        
+        current = self.get_head()
+        while current.next:
+            if current.data == data:
+                return True
+            current = current.next
+        
+        return False
+
+    #O(n) - Return message
+    def delete(self, data):
+        deleted = False
+
+        if self.is_empty():
+            return deleted
+
+        current = self.get_head()
+        previous_node = None
+        
+        while current is not None:
+
+            if data is current.data:
+                previous_node.next = current.next
+                current.next = None
+                deleted = True
+                break
+
+            previous_node = current
+            current = current.next
+
+        if deleted:
+            print(f"The data {data} is deleted!")
+        else:
+            print(f"The data {data} is not in list!")
+            
+        return deleted
+
+    
+    #O(n)
+    def length(self):
+        current = self.get_head()
+        lenght = 0
+
+        while current:
+            lenght += 1
+            current = current.next
+
+        return lenght
+
+
+    def reverse(self):
+        previous = None
+        next_node = None
+        current = self.get_head()
+
+        while current:
+            next_node = current.next
+            current.next = previous
+            previous = current
+            current = next_node
+
+            self.head = previous
+        return self.head
+
 
 class Node():
 
@@ -42,7 +122,23 @@ class Node():
 
 lst = LinkedList()
 lst.head = Node(1)
-lst.printList()
 
 lst.insert_at_tail(2)
+lst.insert_at_tail(3)
+lst.insert_at_head(0)
+lst.insert_at_head(-1)
+lst.insert_at_tail(4)
+lst.insert_at_tail(5)
+lst.printList()
+
+print(lst.search(2))
+print(lst.search(5))
+
+print(lst.delete(3))
+lst.printList()
+
+print(f"Total nodes: {lst.length()}")
+
+print('Linked list reverse')
+lst.reverse()
 lst.printList()
