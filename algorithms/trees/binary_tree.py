@@ -120,6 +120,22 @@ class TreeNode:
 
         return left + right + 1
 
+    def find_node(self, value):
+        
+        if value == self.value:
+            return True
+        
+        if value < self.value:
+            if self.left:
+                return self.left.find_node(value)
+
+        if value > self.value:
+            if self.right:
+                return self.right.find_node(value)
+
+
+
+
 """
 tree = TreeNode(1)
 tree.left = TreeNode(2)
@@ -152,4 +168,8 @@ print(f'Min value is: {tree.search_min_value()}')
 
 print(f'Sum of nodes values: {tree.sum_nodes_values()}')
 print(f'Count nodes: {tree.count_nodes()}')
+
+print(f'Find the number 23')
+print(tree.find_node(23))
+
 

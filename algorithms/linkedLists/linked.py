@@ -111,6 +111,19 @@ class LinkedList():
             self.head = previous
         return self.head
 
+    def remove_duplicates(self):
+        #Sorted order
+        current = self.get_head() 
+	
+        while current is not None:
+            next_node = current.next
+            while next_node is not None and next_node.data == current.data:
+                next_node = next_node.next
+		
+            current.next = next_node
+            current = next_node
+        return self.head
+		
 
 class Node():
 
@@ -129,6 +142,7 @@ lst.insert_at_head(0)
 lst.insert_at_head(-1)
 lst.insert_at_tail(4)
 lst.insert_at_tail(5)
+lst.insert_at_tail(5)
 lst.printList()
 
 print(lst.search(2))
@@ -141,4 +155,8 @@ print(f"Total nodes: {lst.length()}")
 
 print('Linked list reverse')
 lst.reverse()
+lst.printList()
+
+print('Remove duplicates')
+lst.remove_duplicates()
 lst.printList()
