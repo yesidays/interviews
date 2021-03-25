@@ -1,4 +1,5 @@
 # Binary tree
+from random import randint
 
 class TreeNode:
 
@@ -82,8 +83,44 @@ class TreeNode:
 
         return nodes
 
+    def search_max_value(self):
+        if self.right is None:
+            return self.value
 
+        return self.right.search_max_value()
 
+    def search_min_value(self):
+        if self.left is None:
+            return self.value
+        
+        return self.left.search_min_value()
+
+    def sum_nodes_values(self):
+        
+        if self.left:
+            left = self.left.sum_nodes_values()
+        else:
+            left = 0
+
+        if self.right:
+            right = self.right.sum_nodes_values()
+        else:
+            right = 0
+
+        return left + right + self.value
+
+    def count_nodes(self):
+        right = 0
+        left = 0
+        if self.left:
+            left = self.left.count_nodes()
+        
+        if self.right:
+            right = self.right.count_nodes()
+
+        return left + right + 1
+
+"""
 tree = TreeNode(1)
 tree.left = TreeNode(2)
 tree.right = TreeNode(3)
@@ -92,7 +129,13 @@ tree.left.right = TreeNode(5)
 tree.right.left = TreeNode(6)
 tree.right.right = TreeNode(7)
 tree.right.right. right = TreeNode(8)
+"""
 
+tree = TreeNode(5)
+
+for i in range(1, 10):
+    number = randint(1, 50)
+    tree.add_node(number)
 
 
 print('Pre order')
@@ -104,4 +147,9 @@ print(tree.in_order())
 print('Post order')
 print(tree.post_order())
 
+print(f'Max value is: {tree.search_max_value()}')
+print(f'Min value is: {tree.search_min_value()}')
+
+print(f'Sum of nodes values: {tree.sum_nodes_values()}')
+print(f'Count nodes: {tree.count_nodes()}')
 
