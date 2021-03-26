@@ -10,9 +10,9 @@
 """
 def firstDuplicateValue(array):
     found_numbers = {}
+    resp = -1
     for i in range(len(array)):
         number = array[i]
-        resp = -1
         if array[i] in found_numbers:
             count = found_numbers.get(number)
             found_numbers[number] = count + 1
